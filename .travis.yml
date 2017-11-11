@@ -1,27 +1,14 @@
-os:
-  - linux
-  - # osx
-
 env:
   - EXAMPLE=simple-player
   - EXAMPLE=qml-player
 
-branches:
-  except:
-    - project/appveyor
-
-matrix:
-  exclude:
-    - os: linux
-      env: EXAMPLE=simple-player
-
 language: cpp
 
-before_install: . tools/ci/$TRAVIS_OS_NAME/before_install.sh
-install: . tools/ci/$TRAVIS_OS_NAME/install.sh
-script: . tools/ci/$TRAVIS_OS_NAME/script.sh
+before_install: . tools/ci/linux/before_install.sh
+install: . tools/ci/linux/install.sh
+script: . tools/ci/linux/script.sh
 after_success:
-  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && . tools/ci/$TRAVIS_OS_NAME/after_success.sh || true'
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && . tools/ci/linux/after_success.sh || true'
 
 addons:
   apt:
